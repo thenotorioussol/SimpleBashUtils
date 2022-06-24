@@ -1,55 +1,63 @@
 # SimpleBashUtils
 
-`cat [OPTION] [FILE]...`
-### cat Опции
+### cat Usage
 
-| № | Опции | Описание |
+Cat is one of the most frequently used commands on Unix-like operating systems. It has three related functions with regard to text files: displaying them, combining copies of them and creating new ones.
+
+`cat [OPTION] [FILE]...`
+
+### cat Options
+
+| No. | Options | Description |
 | ------ | ------ | ------ |
-| 1 | -b (GNU: --number-nonblank) | нумерует только непустые строки |
-| 2 | -e предполагает и -v (GNU only: -E то же самое, но без применения -v) | также отображает символы конца строки как $  |
-| 3 | -n (GNU: --number) | нумерует все выходные строки |
-| 4 | -s (GNU: --squeeze-blank) | сжимает несколько смежных пустых строк |
-| 5 | -t предполагает и -v (GNU: -T то же самое, но без применения -v) | также отображает табы как ^I
+| 1 | -b (GNU: --number-nonblank) | numbers only non-empty lines |
+| 2 | -e implies -v (GNU only: -E the same, but without implying -v) | but also display end-of-line characters as $  |
+| 3 | -n (GNU: --number) | number all output lines |
+| 4 | -s (GNU: --squeeze-blank) | squeeze multiple adjacent blank lines |
+| 5 | -t implies -v (GNU: -T the same, but without implying -v) | but also display tabs as ^I  |
+
+### grep Usage
 
 `grep [options] template [file_name]`
-### grep Опции
 
-| № | Опции | Описание |
+### grep Options
+
+| No. | Options | Description |
 | ------ | ------ | ------ |
-| 1 | -e | Шаблон |
-| 2 | -i | Игнорирует различия регистра.  |
-| 3 | -v | Инвертирует смысл поиска соответствий. |
-| 4 | -c | Выводит только количество совпадающих строк. |
-| 5 | -l | Выводит только совпадающие файлы.  |
-| 6 | -n | Предваряет каждую строку вывода номером строки из файла ввода. |
+| 1 | -e | pattern |
+| 2 | -i | Ignore uppercase vs. lowercase.  |
+| 3 | -v | Invert match. |
+| 4 | -c | Output count of matching lines only. |
+| 5 | -l | Output matching files only.  |
+| 6 | -n | Precede each matching line with a line number. |
 
 ## Chapter
 
-- Программы должны быть разработаны на языке Си стандарта C11 с использованием компилятора gcc 
-- Код программ cat и grep должен находиться в ветке develop в папках src/cat/ и src/grep/ соответственно  
-- Не использовать устаревшие и выведенные из употребления конструкции языка и библиотечные функции. Обращать внимания на пометки legacy и obsolete в официальной документации по языку и используемым библиотекам. Ориентироваться на стандарт POSIX.1-2017 
-- Программы должны представлять собой исполняемый файл с аргументами командной строки
-- Сборка программ должна быть настроена с помощью Makefile с соответствующими целями: s21_cat, s21_grep  
-- Если используются сторонние библиотеки, в Makefile должны быть заложены сценарии сборки, предусматривающие их подключение/загрузку 
-- Необходимо покрытие интеграционными тестами для всех вариантов флагов и входных значений, на базе сравнения с поведением реальных утилит Bash
-- Программа должна быть разработана в соответствии с принципами структурного программирования
-- Необходимо исключить дублирование кода, переиспользовать общие модули между утилитами. Общие модули можно вынести в отдельную папку src/common
-- Можно использовать стандартные и нестандартные библиотеки языка Си, можно использовать собственноручно разработанные библиотеки из других проектов
-- Формулировка сообщения при возникновении ошибочной ситуации не имеет значения
-- Ввод через stdin обрабатывать не обязательно
+- The programs must be developed in C language of C11 standard using gcc compiler.
+- The program code of the cat and grep must be located on the develop branch in the src/cat/ and src/grep/ folders, respectively  
+- Do not use outdated and legacy language constructions and library functions. Pay attention to the legacy and obsolete marks in the official documentation on the language and the libraries used. Use the POSIX.1-2017 standard.
+- The programs must be executable files with command line arguments
+- The programs must be built with Makefile with appropriate targets: s21_cat, s21_grep
+- If third-party libraries are used, there must be build scripts in makefile to connect/load them
+- Integration tests must cover all flag variants and input values, based on a comparison with the behavior of real Bash utilities 
+- The programs must be developed according to the principles of structured programming
+- Code duplication must be avoided, common modules must be reused between the utilities. Common modules can be moved to a separate folder src/common
+- You can use standard and non-standard C libraries, or you can use your own developed libraries from other projects
+- The statement of the message in the case of an error does not matter
+- Input via stdin is not required to be supported
 
 
-## Part 1. Работа с утилитой cat
+## Part 1. Working with the cat utility
 
-Необходимо разработать утилиту cat:
-- Поддержка всех флагов (включая GNU версии), указанных [выше](#cat-опции)
-- Исходные, заголовочные и сборочный файлы должны располагаться в директории src/cat/
-- Итоговый исполняемый файл должен располагаться в директории src/cat/ и называться s21_cat
+You need to develop a cat utility:
+- Support of all flags (including GNU versions) specified [above](#cat-options)
+- The source, header, and build files must be placed in the src/cat/ directory
+- The resulting executable file must be placed in the directory src/cat/ and named s21_cat
 
-## Part 2. Работа с утилитой grep
+## Part 2. Working with grep utility
 
-Необходимо разработать утилиту grep:
-- Поддержка следующих флагов: `-e`, `-i`, `-v`, `-c`, `-l`, `-n`
-- Для регулярных выражений можно использовать только библиотеки pcre или regex  
-- Исходные, заголовочные и make файлы должны располагаться в директории src/grep/
-- Итоговый исполняемый файл должен располагаться в директории src/grep/ и называться s21_grep
+You need to develop the grep utility:
+- Support of the following flags: `-e`, `-i`, `-v`, `-c`, `-l`, `-n`
+- Only pcre or regex libraries can be used for regular expressions
+- The source, header and make files must be placed in the src/grep/ directory
+- The resulting executable file must be placed in the directory src/grep/ and named s21_grep
